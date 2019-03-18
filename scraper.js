@@ -43,15 +43,16 @@ function getProducts(){
 	});
 }
 
-function getProductInfo(data){
+function getProductInfo(html){
 	return new Promise((resolve, reject) => {
 		//load the html into cheerio for scraping
-    const $ = cheerio.load(data);
+    const $ = cheerio.load(html);
    	//Store all product links in variable which can be used for looping over the products when scraping
    	const productLinks = $('.products a');
 
 		productLinks.each(function() {
 			const urlEnding = $(this).attr('href');
+			let data = '';
 			https.get('https://shirts4mike.com/'+ urlEnding, function (response) {
 
 				// A chunk of data has been recieved.
@@ -93,6 +94,13 @@ function getProductInfo(data){
 	});
 }
 
-   	
-   	
 getProducts().then(data => {getProductInfo(data)});
+
+
+
+
+
+
+
+
+
