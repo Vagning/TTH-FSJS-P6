@@ -85,16 +85,14 @@ function getProductInfo(html){
 
 			});
 		});
-
-
 		
-
-   	
 
 	});
 }
 
-getProducts().then(data => {getProductInfo(data)});
+getProducts().then(data => {
+	getProductInfo(data)
+});
 
 
 
