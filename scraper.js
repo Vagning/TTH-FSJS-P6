@@ -32,7 +32,7 @@ function getProducts(){
 
 		  // The whole response has been received. Print out the result.
 		  response.on('end', () => {
-		   	return resolve(data)
+		   	return resolve(data);
 		  });
 
 		}).on("error", (error) => {
@@ -50,7 +50,7 @@ function getProductInfo(html){
    	//Store all product links in variable which can be used for looping over the products when scraping
    	const productLinks = $('.products a');
 
-		productLinks.each(function() {
+		productLinks.each(function(index) {
 			const urlEnding = $(this).attr('href');
 			let data = '';
 			https.get('https://shirts4mike.com/'+ urlEnding, function (response) {
@@ -77,18 +77,23 @@ function getProductInfo(html){
 				  	productInfo.url = ('https://shirts4mike.com/' + urlEnding);
 				  	productInfo.time = df(new Date(), 'yyyy-mm-dd HH:MM:ss');
 
+				  	//Push to products array
 				  	products.push(productInfo);
-				  	console.log(productInfo);
+				  	//console.log(productInfo);
+				  	
+
 				  }
 
 				});
 
 			});
-		});
 		
+		});
 
 	});
 }
+
+function writeCSV(data) {}
 
 getProducts().then(data => {
 	getProductInfo(data)
